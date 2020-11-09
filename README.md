@@ -18,6 +18,4 @@ En este programa se encuentra la base para el Buscaminas de Desarrollo de intefa
 
 ## Licencia
 
-He hecho push
-
 La licencia de este repositorio y todo su contenido es [GNU General Public License v.3.0](https://es.wikipedia.org/wiki/Licencia_p%C3%BAblica_general_de_GNU) 
