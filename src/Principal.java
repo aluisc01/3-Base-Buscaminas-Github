@@ -3,8 +3,8 @@ import java.awt.EventQueue;
 /**
  * Clase principal del Buscaminas
  * 
- * @author Alberto Luis Calero
- *
+ * @author aluisc01
+ * 
  */
 public class Principal {
 
