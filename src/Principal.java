@@ -2,13 +2,15 @@ import java.awt.EventQueue;
 
 /**
  * Clase principal del Buscaminas
- * @author  {Rellenar por el alumno}
+ * 
+ * @author Alberto Luis Calero
  *
  */
 public class Principal {
 
 	/**
 	 * Método main
+	 * 
 	 * @param args : Cadenas de parámetros del main
 	 */
 	public static void main(String[] args) {
