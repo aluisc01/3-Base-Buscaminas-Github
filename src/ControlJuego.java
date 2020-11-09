@@ -61,7 +61,101 @@ public class ControlJuego {
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 **/
 	private int calculoMinasAdjuntas(int i, int j) {
-		return 0;
+		int numero = 0;
+		Posicion[] posiciones = { new Posicion(i, j + 1), new Posicion(i, j - 1), new Posicion(i + 1, j),
+				new Posicion(i - 1, j), new Posicion(i + 1, j + 1), new Posicion(i + 1, j - 1),
+				new Posicion(i - 1, j + 1), new Posicion(i - 1, j - 1) };
+		if (i > 0 && j > 0 && i < 10 && j < 10) {
+			for (int index = 0; index < posiciones.length; index++) {
+				if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
+					numero++;
+				}
+			}
+		} else {
+			if (i == 0 && j == 0) {
+				for (int index = 0; index < posiciones.length; index++) {
+					if (index != 0 && index != 7 && index != 3 && index != 5 && index != 6) {
+						if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
+							numero++;
+						}
+					}
+				}
+			} else {
+				if (i == 0 && j < 10) {
+					for (int index = 0; index < posiciones.length; index++) {
+						if (index != 7 && index != 3 && index != 6) {
+							if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
+								numero++;
+							}
+						}
+					}
+				} else {
+					if (i == 0 && j == 10) {
+						for (int index = 0; index < posiciones.length; index++) {
+							if (index != 7 && index != 6 && index != 1 && index != 3 && index != 4) {
+								if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
+									numero++;
+								}
+							}
+						}
+					} else {
+						if (i == 10 && j == 0) {
+							for (int index = 0; index < posiciones.length; index++) {
+								if (index == 3 || index == 6 || index == 1) {
+									if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
+										numero++;
+									}
+								}
+							}
+						} else {
+							if (i == 10 && j == 10) {
+								for (int index = 0; index < posiciones.length; index++) {
+									if (index == 3 || index == 0 || index == 7) {
+										if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
+											numero++;
+										}
+									}
+								}
+							} else {
+								if (i == 10 && j < 10) {
+									for (int index = 0; index < posiciones.length; index++) {
+										if (index != 5 && index != 2 && index != 4) {
+											if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
+												numero++;
+											}
+										}
+									}
+								} else {
+									if (i < 10 && j == 0) {
+										for (int index = 0; index < posiciones.length; index++) {
+											if (index != 7 && index != 0 && index != 5) {
+												if (tablero[posiciones[index].getI()][posiciones[index]
+														.getJ()] == MINA) {
+													numero++;
+												}
+											}
+										}
+									} else {
+										if (i < 10 && j == 10) {
+											for (int index = 0; index < posiciones.length; index++) {
+												if (index != 6 && index != 1 && index != 4) {
+													if (tablero[posiciones[index].getI()][posiciones[index]
+															.getJ()] == MINA) {
+														numero++;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return numero;
 	}
 
 	/**
