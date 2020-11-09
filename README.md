@@ -1,5 +1,4 @@
 # BUSCAMINAS: Alberto Luis Calero
-=========================
 
 En este programa se encuentra la base para el Buscaminas de Desarrollo de intefaces (DAM2).
 
