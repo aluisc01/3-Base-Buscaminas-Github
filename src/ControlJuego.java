@@ -44,7 +44,7 @@ public class ControlJuego {
 			jAux = numeroRandom(0, 10);
 			if (tablero[iAux][jAux] != MINA) {
 				tablero[iAux][jAux] = MINA;
-				System.out.println(iAux + "\t" + jAux);
+				// System.out.println(iAux + "\t" + jAux);Para ver la posicion de las minas
 				contador++;
 			}
 		}
