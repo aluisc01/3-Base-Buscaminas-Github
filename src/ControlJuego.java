@@ -38,7 +38,16 @@ public class ControlJuego {
 
 		// TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior,
 		// lo pongo todo a cero para inicializarlo.
-
+		int iAux, jAux, contador = 0;
+		while (contador < 20) {
+			iAux = numeroRandom(0, 10);
+			jAux = numeroRandom(0, 10);
+			if (tablero[iAux][jAux] != MINA) {
+				tablero[iAux][jAux] = MINA;
+				System.out.println(iAux + "\t" + jAux);
+				contador++;
+			}
+		}
 		// Al final del m�todo hay que guardar el n�mero de minas para las casillas que
 		// no son mina:
 		for (int i = 0; i < tablero.length; i++) {
@@ -48,6 +57,17 @@ public class ControlJuego {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Devuelve un numero random entre el minimo y el maximo
+	 * 
+	 * @param minimo
+	 * @param maximo
+	 * @return
+	 */
+	private int numeroRandom(int minimo, int maximo) {
+		return (int) (Math.random() * maximo + minimo);
 	}
 
 	/**
@@ -65,92 +85,11 @@ public class ControlJuego {
 		Posicion[] posiciones = { new Posicion(i, j + 1), new Posicion(i, j - 1), new Posicion(i + 1, j),
 				new Posicion(i - 1, j), new Posicion(i + 1, j + 1), new Posicion(i + 1, j - 1),
 				new Posicion(i - 1, j + 1), new Posicion(i - 1, j - 1) };
-		if (i > 0 && j > 0 && i < 10 && j < 10) {
-			for (int index = 0; index < posiciones.length; index++) {
+		for (int index = 0; index < 8; index++) {
+			if (posiciones[index].getI() >= 0 && posiciones[index].getJ() >= 0
+					&& posiciones[index].getI() < LADO_TABLERO && posiciones[index].getJ() < LADO_TABLERO) {
 				if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
 					numero++;
-				}
-			}
-		} else {
-			if (i == 0 && j == 0) {
-				for (int index = 0; index < posiciones.length; index++) {
-					if (index != 0 && index != 7 && index != 3 && index != 5 && index != 6) {
-						if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
-							numero++;
-						}
-					}
-				}
-			} else {
-				if (i == 0 && j < 10) {
-					for (int index = 0; index < posiciones.length; index++) {
-						if (index != 7 && index != 3 && index != 6) {
-							if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
-								numero++;
-							}
-						}
-					}
-				} else {
-					if (i == 0 && j == 10) {
-						for (int index = 0; index < posiciones.length; index++) {
-							if (index != 7 && index != 6 && index != 1 && index != 3 && index != 4) {
-								if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
-									numero++;
-								}
-							}
-						}
-					} else {
-						if (i == 10 && j == 0) {
-							for (int index = 0; index < posiciones.length; index++) {
-								if (index == 3 || index == 6 || index == 1) {
-									if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
-										numero++;
-									}
-								}
-							}
-						} else {
-							if (i == 10 && j == 10) {
-								for (int index = 0; index < posiciones.length; index++) {
-									if (index == 3 || index == 0 || index == 7) {
-										if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
-											numero++;
-										}
-									}
-								}
-							} else {
-								if (i == 10 && j < 10) {
-									for (int index = 0; index < posiciones.length; index++) {
-										if (index != 5 && index != 2 && index != 4) {
-											if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
-												numero++;
-											}
-										}
-									}
-								} else {
-									if (i < 10 && j == 0) {
-										for (int index = 0; index < posiciones.length; index++) {
-											if (index != 7 && index != 0 && index != 5) {
-												if (tablero[posiciones[index].getI()][posiciones[index]
-														.getJ()] == MINA) {
-													numero++;
-												}
-											}
-										}
-									} else {
-										if (i < 10 && j == 10) {
-											for (int index = 0; index < posiciones.length; index++) {
-												if (index != 6 && index != 1 && index != 4) {
-													if (tablero[posiciones[index].getI()][posiciones[index]
-															.getJ()] == MINA) {
-														numero++;
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
 				}
 			}
 		}
@@ -207,6 +146,8 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 	public int getMinasAlrededor(int i, int j) {
+		int arriba = j - 1, abajo = j + 1, izquierda = i - 1, derecha = i + 1;
+
 		return 0;
 	}
 
