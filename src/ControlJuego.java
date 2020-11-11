@@ -24,6 +24,7 @@ public class ControlJuego {
 
 		// Inicializamos una nueva partida
 		inicializarPartida();
+		depurarTablero();
 	}
 
 	/**
@@ -38,13 +39,22 @@ public class ControlJuego {
 
 		// TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior,
 		// lo pongo todo a cero para inicializarlo.
+		// Ponemos todas las posiciones a 0 por si hay una partida anterior
+
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+				tablero[i][j] = 0;
+			}
+		}
+		// Puntuacion a 0
+		puntuacion = 0;
 		int iAux, jAux, contador = 0;
-		while (contador < 20) {
-			iAux = numeroRandom(0, 10);
-			jAux = numeroRandom(0, 10);
+		// Colocamos tantas minas como indique MINAS_INICIALES
+		while (contador < MINAS_INICIALES) {
+			iAux = numeroRandom(0, LADO_TABLERO);
+			jAux = numeroRandom(0, LADO_TABLERO);
 			if (tablero[iAux][jAux] != MINA) {
 				tablero[iAux][jAux] = MINA;
-				// System.out.println(iAux + "\t" + jAux);Para ver la posicion de las minas
 				contador++;
 			}
 		}
@@ -64,7 +74,7 @@ public class ControlJuego {
 	 * 
 	 * @param minimo
 	 * @param maximo
-	 * @return
+	 * @return un entero random entre el minimo y el maximo
 	 */
 	private int numeroRandom(int minimo, int maximo) {
 		return (int) (Math.random() * maximo + minimo);
@@ -82,13 +92,20 @@ public class ControlJuego {
 	 **/
 	private int calculoMinasAdjuntas(int i, int j) {
 		int numero = 0;
-		Posicion[] posiciones = { new Posicion(i, j + 1), new Posicion(i, j - 1), new Posicion(i + 1, j),
-				new Posicion(i - 1, j), new Posicion(i + 1, j + 1), new Posicion(i + 1, j - 1),
-				new Posicion(i - 1, j + 1), new Posicion(i - 1, j - 1) };
-		for (int index = 0; index < 8; index++) {
-			if (posiciones[index].getI() >= 0 && posiciones[index].getJ() >= 0
-					&& posiciones[index].getI() < LADO_TABLERO && posiciones[index].getJ() < LADO_TABLERO) {
-				if (tablero[posiciones[index].getI()][posiciones[index].getJ()] == MINA) {
+		int[] posiciones = { i, j + 1, i, j - 1, i + 1, j, i - 1, j, i + 1, j + 1, i + 1, j - 1, i - 1, j + 1, i - 1,
+				j - 1 };
+		/*
+		 * Posicion[] posiciones = { new Posicion(i, j + 1), new Posicion(i, j - 1), new
+		 * Posicion(i + 1, j), new Posicion(i - 1, j), new Posicion(i + 1, j + 1), new
+		 * Posicion(i + 1, j - 1), new Posicion(i - 1, j + 1), new Posicion(i - 1, j -
+		 * 1) };
+		 */
+		System.out.println(posiciones.length);
+		for (int index = 0; index < posiciones.length; index += +2) {
+			System.out.println(index);
+			if (posiciones[index] >= 0 && posiciones[index + 1] >= 0 && posiciones[index] < LADO_TABLERO
+					&& posiciones[index + 1] < LADO_TABLERO) {
+				if (tablero[posiciones[index]][posiciones[index + 1]] == MINA) {
 					numero++;
 				}
 			}
@@ -118,6 +135,14 @@ public class ControlJuego {
 	 *         minas.
 	 **/
 	public boolean esFinJuego() {
+		boolean finalizado = true;
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+				if (abrirCasilla(i, j) && tablero[i][j] == MINA) {
+					finalizado = false;
+				}
+			}
+		}
 		return false;
 	}
 
@@ -146,9 +171,7 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 	public int getMinasAlrededor(int i, int j) {
-		int arriba = j - 1, abajo = j + 1, izquierda = i - 1, derecha = i + 1;
-
-		return 0;
+		return tablero[i][j];
 	}
 
 	/**
@@ -157,7 +180,7 @@ public class ControlJuego {
 	 * @return Un entero con la puntuación actual
 	 */
 	public int getPuntuacion() {
-		return 0;
+		return puntuacion;
 	}
 
 }
