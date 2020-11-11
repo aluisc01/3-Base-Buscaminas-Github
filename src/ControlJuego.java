@@ -115,7 +115,8 @@ public class ControlJuego {
 	}
 
 	/**
-	 * Método que nos permite
+	 * Método que comprueba si hay mina , si no hay mina sumara un punto y devolvera
+	 * false en caso de que haya mina devolvera true
 	 * 
 	 * @pre : La casilla nunca debe haber sido abierta antes, no es controlado por
 	 *      el ControlJuego. Por lo tanto siempre sumaremos puntos
@@ -124,7 +125,14 @@ public class ControlJuego {
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
 	public boolean abrirCasilla(int i, int j) {
-		return false;
+		boolean hayMina;
+		if (tablero[i][j] == MINA) {
+			hayMina = true;
+		} else {
+			hayMina = false;
+			puntuacion++;
+		}
+		return hayMina;
 	}
 
 	/**
@@ -135,15 +143,9 @@ public class ControlJuego {
 	 *         minas.
 	 **/
 	public boolean esFinJuego() {
-		boolean finalizado = true;
-		for (int i = 0; i < tablero.length; i++) {
-			for (int j = 0; j < tablero[i].length; j++) {
-				if (abrirCasilla(i, j) && tablero[i][j] == MINA) {
-					finalizado = false;
-				}
-			}
-		}
-		return false;
+		boolean finalizado = false;
+
+		return finalizado;
 	}
 
 	/**
