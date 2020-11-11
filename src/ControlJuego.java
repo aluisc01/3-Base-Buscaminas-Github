@@ -100,9 +100,7 @@ public class ControlJuego {
 		 * Posicion(i + 1, j - 1), new Posicion(i - 1, j + 1), new Posicion(i - 1, j -
 		 * 1) };
 		 */
-		System.out.println(posiciones.length);
 		for (int index = 0; index < posiciones.length; index += +2) {
-			System.out.println(index);
 			if (posiciones[index] >= 0 && posiciones[index + 1] >= 0 && posiciones[index] < LADO_TABLERO
 					&& posiciones[index + 1] < LADO_TABLERO) {
 				if (tablero[posiciones[index]][posiciones[index + 1]] == MINA) {
