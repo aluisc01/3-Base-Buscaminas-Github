@@ -77,7 +77,8 @@ public class ControlJuego {
 	 * @return un entero random entre el minimo y el maximo
 	 */
 	private int numeroRandom(int minimo, int maximo) {
-		return (int) (Math.random() * maximo + minimo);
+		Random rd = new Random();
+		return (int) (rd.nextInt(maximo) + minimo);
 	}
 
 	/**
@@ -92,22 +93,27 @@ public class ControlJuego {
 	 **/
 	private int calculoMinasAdjuntas(int i, int j) {
 		int numero = 0;
-		int[] posiciones = { i, j + 1, i, j - 1, i + 1, j, i - 1, j, i + 1, j + 1, i + 1, j - 1, i - 1, j + 1, i - 1,
-				j - 1 };
-		/*
-		 * Posicion[] posiciones = { new Posicion(i, j + 1), new Posicion(i, j - 1), new
-		 * Posicion(i + 1, j), new Posicion(i - 1, j), new Posicion(i + 1, j + 1), new
-		 * Posicion(i + 1, j - 1), new Posicion(i - 1, j + 1), new Posicion(i - 1, j -
-		 * 1) };
-		 */
-		for (int index = 0; index < posiciones.length; index += +2) {
-			if (posiciones[index] >= 0 && posiciones[index + 1] >= 0 && posiciones[index] < LADO_TABLERO
-					&& posiciones[index + 1] < LADO_TABLERO) {
-				if (tablero[posiciones[index]][posiciones[index + 1]] == MINA) {
+		// int[] posiciones = { i, j + 1, i, j - 1, i + 1, j, i - 1, j, i + 1, j + 1, i
+		// + 1, j - 1, i - 1, j + 1, i - 1,j - 1 };
+
+		int iInicial = Math.max(0, i - 1);
+		int iFinal = Math.min(LADO_TABLERO - 1, i + 1);
+		int jInicial = Math.max(0, j - 1);
+		int jFinal = Math.min(LADO_TABLERO - 1, j + 1);
+
+		for (int k = iInicial; k <= iFinal; k++) {
+			for (int k2 = jInicial; k2 <= jFinal; k2++) {
+				if (tablero[k][k2] == MINA) {
 					numero++;
 				}
 			}
 		}
+		/*
+		 * for (int index = 0; index < posiciones.length; index += +2) { if
+		 * (posiciones[index] >= 0 && posiciones[index + 1] >= 0 && posiciones[index] <
+		 * LADO_TABLERO && posiciones[index + 1] < LADO_TABLERO) { if
+		 * (tablero[posiciones[index]][posiciones[index + 1]] == MINA) { numero++; } } }
+		 */
 
 		return numero;
 	}
@@ -142,7 +148,9 @@ public class ControlJuego {
 	 **/
 	public boolean esFinJuego() {
 		boolean finalizado = false;
-
+		if ((LADO_TABLERO * LADO_TABLERO - MINAS_INICIALES) == puntuacion) {
+			finalizado = true;
+		}
 		return finalizado;
 	}
 

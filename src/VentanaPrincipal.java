@@ -141,7 +141,36 @@ public class VentanaPrincipal {
 	 * programa
 	 */
 	public void inicializarListeners() {
-		// TODO
+		for (int i = 0; i < botonesJuego.length; i++) {
+			for (int j = 0; j < botonesJuego.length; j++) {
+				botonesJuego[i][j].addActionListener(new ActionListener() {
+					int j;
+					int i;
+
+					public void actionPerformed(ActionEvent e) {
+						if (!juego.abrirCasilla(i, j)) {
+							mostrarNumMinasAlrededor(i, j);
+							actualizarPuntuacion();
+						} else {
+							mostrarFinJuego(true);
+						}
+					}
+
+					private ActionListener recogerIJ(int i, int j) {
+						this.i = i;
+						this.j = j;
+						return this;
+					}
+				}.recogerIJ(i, j));
+			}
+		}
+
+		botonEmpezar.addActionListener((e) -> {
+			ventana = new JFrame();
+			inicializarComponentes();
+			inicializarListeners();
+			juego = new ControlJuego();
+		});
 	}
 
 	/**
@@ -155,15 +184,14 @@ public class VentanaPrincipal {
 	 * @param j: posición horizontal de la celda.
 	 */
 	public void mostrarNumMinasAlrededor(int i, int j) {
-		JLabel label = new JLabel(Integer.toString(juego.getMinasAlrededor(i, j)));
-		panelesJuego[i][j].remove(botonesJuego[i][j]);
+		JLabel label = new JLabel();
+		panelesJuego[i][j].removeAll();
 		label.setForeground(correspondenciaColores[juego.getMinasAlrededor(i, j)]);
 		label.setVerticalAlignment(JLabel.CENTER);
+		label.setHorizontalAlignment(JLabel.CENTER);
 		panelesJuego[i][j].add(label);
+		label.setText("" + juego.getMinasAlrededor(i, j));
 
-		if (juego.getMinasAlrededor(i, j) == -1) {
-			System.out.println("Perdiste");
-		}
 	}
 
 	/**
@@ -176,14 +204,25 @@ public class VentanaPrincipal {
 	 *       juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		// TODO
+		for (int i = 0; i < botonesJuego.length; i++) {
+			for (int j = 0; j < botonesJuego.length; j++) {
+				botonesJuego[i][j].setEnabled(false);
+			}
+		}
+		if (porExplosion) {// Si ha sido por explosion has perdido
+			JOptionPane.showMessageDialog(ventana, "Ha explotado una mina,has perdido\n ¿Quieres jugar de nuevo?",
+					"FINAL", JOptionPane.YES_NO_OPTION);
+		} else {// Si no habra ganado
+			JOptionPane.showMessageDialog(ventana, "HAS GANADO!!\n ¿Quieres jugar de nuevo?", "FINAL",
+					JOptionPane.YES_NO_OPTION);
+		}
 	}
 
 	/**
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
-		// TODO
+		pantallaPuntuacion.setText("" + juego.getPuntuacion());
 	}
 
 	/**
