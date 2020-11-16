@@ -93,8 +93,6 @@ public class ControlJuego {
 	 **/
 	private int calculoMinasAdjuntas(int i, int j) {
 		int numero = 0;
-		// int[] posiciones = { i, j + 1, i, j - 1, i + 1, j, i - 1, j, i + 1, j + 1, i
-		// + 1, j - 1, i - 1, j + 1, i - 1,j - 1 };
 
 		int iInicial = Math.max(0, i - 1);
 		int iFinal = Math.min(LADO_TABLERO - 1, i + 1);
@@ -147,11 +145,7 @@ public class ControlJuego {
 	 *         minas.
 	 **/
 	public boolean esFinJuego() {
-		boolean finalizado = false;
-		if ((LADO_TABLERO * LADO_TABLERO - MINAS_INICIALES) == puntuacion) {
-			finalizado = true;
-		}
-		return finalizado;
+		return (LADO_TABLERO * LADO_TABLERO - MINAS_INICIALES) == puntuacion;
 	}
 
 	/**

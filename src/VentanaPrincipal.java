@@ -143,33 +143,16 @@ public class VentanaPrincipal {
 	public void inicializarListeners() {
 		for (int i = 0; i < botonesJuego.length; i++) {
 			for (int j = 0; j < botonesJuego.length; j++) {
-				botonesJuego[i][j].addActionListener(new ActionListener() {
-					int j;
-					int i;
-
-					public void actionPerformed(ActionEvent e) {
-						if (!juego.abrirCasilla(i, j)) {
-							mostrarNumMinasAlrededor(i, j);
-							actualizarPuntuacion();
-						} else {
-							mostrarFinJuego(true);
-						}
-					}
-
-					private ActionListener recogerIJ(int i, int j) {
-						this.i = i;
-						this.j = j;
-						return this;
-					}
-				}.recogerIJ(i, j));
+				botonesJuego[i][j].addActionListener(new ActionBoton(i, j, this));
 			}
 		}
 
 		botonEmpezar.addActionListener((e) -> {
-			ventana = new JFrame();
+			ventana.getContentPane().removeAll();
+			juego = new ControlJuego();
 			inicializarComponentes();
 			inicializarListeners();
-			juego = new ControlJuego();
+			refrescarPantalla();
 		});
 	}
 
@@ -211,10 +194,10 @@ public class VentanaPrincipal {
 		}
 		if (porExplosion) {// Si ha sido por explosion has perdido
 			JOptionPane.showMessageDialog(ventana, "Ha explotado una mina,has perdido\n ¿Quieres jugar de nuevo?",
-					"FINAL", JOptionPane.YES_NO_OPTION);
+					"FINAL", JOptionPane.INFORMATION_MESSAGE);
 		} else {// Si no habra ganado
 			JOptionPane.showMessageDialog(ventana, "HAS GANADO!!\n ¿Quieres jugar de nuevo?", "FINAL",
-					JOptionPane.YES_NO_OPTION);
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 

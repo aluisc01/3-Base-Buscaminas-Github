@@ -8,12 +8,18 @@ import java.awt.event.ActionListener;
  * ventana, se puede acceder a la variable de tipo ControlJuego
  * 
  * @author Alberto Luis Calero
- **
+ *
  */
 public class ActionBoton implements ActionListener {
+	VentanaPrincipal ventana;
+	int i;
+	int j;
 
-	public ActionBoton() {
+	public ActionBoton(int i, int j, VentanaPrincipal ventana) {
 		// TODO
+		this.i = i;
+		this.j = j;
+		this.ventana = ventana;
 	}
 
 	/**
@@ -21,7 +27,16 @@ public class ActionBoton implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO
+		if (!ventana.getJuego().abrirCasilla(i, j)) {
+			ventana.mostrarNumMinasAlrededor(i, j);
+			ventana.actualizarPuntuacion();
+			if (ventana.getJuego().esFinJuego()) {
+				ventana.mostrarFinJuego(false);
+			}
+		} else {
+			ventana.mostrarFinJuego(true);
+		}
+
 	}
 
 }
