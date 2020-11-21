@@ -1,10 +1,12 @@
+package buscaminas;
+
 import java.awt.EventQueue;
 
 /**
  * Clase principal del Buscaminas
  * 
  * @author Alberto Luis Calero
- * 
+ * @author Jesús Redondo
  */
 public class Principal {
 

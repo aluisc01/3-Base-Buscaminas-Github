@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+package buscaminas;
+
+//import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -12,19 +14,40 @@ import java.util.Random;
  */
 public class ControlJuego {
 	private final static int MINA = -1;
-	final int MINAS_INICIALES = 20;
-	final int LADO_TABLERO = 10;
-
+	/**
+	 * Minas con las que cuenta el tablero
+	 */
+	int minas_iniciales;
+	/**
+	 * Longitud de cada lado del tablero
+	 */
+	int lado_tablero;
+	/**
+	 * Matriz donde almacenaremos si la casilla es mina , o en su defecto las minas
+	 * que tiene alrededor
+	 */
 	private int[][] tablero;
+	/**
+	 * Puntuacion del usuario cada vez que abramos una casilla que no sea mina
+	 * sumaremos uno
+	 */
 	private int puntuacion;
 
-	public ControlJuego() {
+	/**
+	 * Constructor parametrizado del juego
+	 * 
+	 * @param lado_tablero    longitud del lado del tablero
+	 * @param minas_iniciales numero de minas con las que jugaremos
+	 */
+	public ControlJuego(int lado_tablero, int minas_iniciales) {
+		this.lado_tablero = lado_tablero;
+		this.minas_iniciales = minas_iniciales;
 		// Creamos el tablero:
-		tablero = new int[LADO_TABLERO][LADO_TABLERO];
+		tablero = new int[lado_tablero][lado_tablero];
 
 		// Inicializamos una nueva partida
 		inicializarPartida();
-		depurarTablero();
+		depurarTablero();// Para ver donde estan las minas y las minas que tiene alrededor cada elemento
 	}
 
 	/**
@@ -50,9 +73,9 @@ public class ControlJuego {
 		puntuacion = 0;
 		int iAux, jAux, contador = 0;
 		// Colocamos tantas minas como indique MINAS_INICIALES
-		while (contador < MINAS_INICIALES) {
-			iAux = numeroRandom(0, LADO_TABLERO);
-			jAux = numeroRandom(0, LADO_TABLERO);
+		while (contador < minas_iniciales) {
+			iAux = numeroRandom(0, lado_tablero);
+			jAux = numeroRandom(0, lado_tablero);
 			if (tablero[iAux][jAux] != MINA) {
 				tablero[iAux][jAux] = MINA;
 				contador++;
@@ -72,8 +95,8 @@ public class ControlJuego {
 	/**
 	 * Devuelve un numero random entre el minimo y el maximo
 	 * 
-	 * @param minimo
-	 * @param maximo
+	 * @param minimo un numero minimo para generar el random
+	 * @param maximo un numero maximo para generar el random
 	 * @return un entero random entre el minimo y el maximo
 	 */
 	private int numeroRandom(int minimo, int maximo) {
@@ -95,9 +118,9 @@ public class ControlJuego {
 		int numero = 0;
 
 		int iInicial = Math.max(0, i - 1);
-		int iFinal = Math.min(LADO_TABLERO - 1, i + 1);
+		int iFinal = Math.min(lado_tablero - 1, i + 1);
 		int jInicial = Math.max(0, j - 1);
-		int jFinal = Math.min(LADO_TABLERO - 1, j + 1);
+		int jFinal = Math.min(lado_tablero - 1, j + 1);
 
 		for (int k = iInicial; k <= iFinal; k++) {
 			for (int k2 = jInicial; k2 <= jFinal; k2++) {
@@ -145,7 +168,7 @@ public class ControlJuego {
 	 *         minas.
 	 **/
 	public boolean esFinJuego() {
-		return (LADO_TABLERO * LADO_TABLERO - MINAS_INICIALES) == puntuacion;
+		return (lado_tablero * lado_tablero - minas_iniciales) == puntuacion;
 	}
 
 	/**
@@ -183,6 +206,24 @@ public class ControlJuego {
 	 */
 	public int getPuntuacion() {
 		return puntuacion;
+	}
+
+	/**
+	 * metodo que devuelve las minas en el tablero
+	 * 
+	 * @return entero con el numero de minas
+	 */
+	public int getMinas_iniciales() {
+		return this.minas_iniciales;
+	}
+
+	/**
+	 * Metodo que devuelve la longitud del lado del tablero
+	 * 
+	 * @return
+	 */
+	public int getLado_tablero() {
+		return this.lado_tablero;
 	}
 
 }
