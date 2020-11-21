@@ -7,7 +7,7 @@ import java.util.Random;
  * Clase gestora del tablero de juego. Guarda una matriz de enteros representado
  * el tablero. Si hay una mina en una posición guarda el número -1 Si no hay una
  * mina, se guarda cuántas minas hay alrededor. Almacena la puntuación de la
- * partida
+ * partida.
  * 
  * @author Alberto Luis Calero
  *

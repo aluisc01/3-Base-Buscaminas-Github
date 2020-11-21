@@ -12,7 +12,7 @@ import java.text.NumberFormat;
 
 /**
  * Clase para cofigurar la partida decidiendo el lado del tablero maximo 50 y el
- * numero de minas
+ * numero de minas.
  * 
  * @author Alberto Luis Calero
  */

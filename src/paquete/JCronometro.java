@@ -67,7 +67,7 @@ public class JCronometro extends JPanel implements Runnable {
     }
 
     /**
-     * Metodo que sobreescribimos para poder hacer el cronometro
+     * Metodo que sobreescribimos para poder hacer el cronometro.
      */
     @Override
     public void run() {

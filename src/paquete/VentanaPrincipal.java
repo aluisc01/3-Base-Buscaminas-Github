@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
  * Ventana principal del Buscaminas
  * <p>
  * En esta clase se generara un Frame en el que meteremos los componentes
- * necesarios para jugar al buscaminas.
+ * necesarios para jugar al buscaminas .
  * </p>
  * {@link #inicializar()}
  * 

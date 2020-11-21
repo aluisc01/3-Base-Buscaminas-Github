@@ -6,7 +6,7 @@ import java.awt.EventQueue;
  * Clase principal del Buscaminas
  * 
  * @author Alberto Luis Calero
- * @author Jesús Redondo
+ * @author Jesús Redondo García
  */
 public class Principal {
 
