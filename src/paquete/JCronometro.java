@@ -1,4 +1,4 @@
-package buscaminas;
+package paquete;
 
 import java.awt.*;
 import java.awt.Font;

@@ -1,4 +1,4 @@
-package buscaminas;
+package paquete;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
