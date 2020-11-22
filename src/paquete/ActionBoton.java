@@ -51,10 +51,10 @@ public class ActionBoton implements ActionListener, MouseListener {
 	public void actionPerformed(ActionEvent e) {
 		if (ventana.botonesJuego[i][j].getBackground() != Color.BLACK) {// Si el color del boton es negro quiere decir
 																		// que hemos pulsado clic derecho y no podremos
-																		// hacer click
+																		// hacer accion normal
 			if (!ventana.getJuego().abrirCasilla(i, j)) {// Si no hay mina
 				ventana.mostrarNumMinasAlrededor(i, j);// Mostramos el numero de minas alrededor de la casilla
-				ventana.actualizarPuntuacion();// Actualizamos la posicion
+				ventana.actualizarPuntuacion();// Actualizamos la puntuacion
 				if (ventana.getJuego().getMinasAlrededor(i, j) == 0) {// Si el valor de minasAlrededor es 0 despejaremos
 																		// las casillas cercanas
 					mostrarAlrededor(i, j);
@@ -70,7 +70,7 @@ public class ActionBoton implements ActionListener, MouseListener {
 
 	/**
 	 * Con este metodo autogeneraremos un click si la casilla que hemos tocado es 0
-	 * y despejaremos las casillas colindantes en todo caso menos que sea una mina.
+	 * y despejaremos las casillas colindantes.
 	 * 
 	 * @param i cordenada del boton en X
 	 * @param j cordenada del boton en Y
@@ -79,11 +79,12 @@ public class ActionBoton implements ActionListener, MouseListener {
 		for (int k = Math.max(0, i - 1); k <= Math.min(ventana.getJuego().getLado_tablero() - 1, i + 1); k++) {
 			for (int k2 = Math.max(0, j - 1); k2 <= Math.min(ventana.getJuego().getLado_tablero() - 1, j + 1); k2++) {
 				if (!(k == i && k2 == j)) {// No es la posicion que le hemos pasado
-					if (ventana.getJuego().getMinasAlrededor(i, j) != -1) {// No es mina
-						if (ventana.panelesJuego[k][k2].getComponent(0) instanceof JButton) {// Es un boton
-							JButton siguiente = (JButton) ventana.panelesJuego[k][k2].getComponent(0);
-							siguiente.doClick(0);// Autogeneramos un click en el boton
-						}
+					if (ventana.panelesJuego[k][k2].getComponent(0) instanceof JButton) {// Es un boton
+						JButton siguiente = (JButton) ventana.panelesJuego[k][k2].getComponent(0);// Cojemos el boton ya
+																									// que el panel solo
+																									// tendra un
+																									// elemento
+						siguiente.doClick(0);// Autogeneramos un click en el boton
 					}
 				}
 			}

@@ -60,7 +60,6 @@ public class ControlJuego {
 	 */
 	public void inicializarPartida() {
 
-		// TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior,
 		// lo pongo todo a cero para inicializarlo.
 		// Ponemos todas las posiciones a 0 por si hay una partida anterior
 

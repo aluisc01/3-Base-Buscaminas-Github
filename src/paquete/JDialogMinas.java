@@ -134,9 +134,11 @@ public class JDialogMinas extends JDialog {
                                                                                     // defecto
                 lado = 10;
             } else
-                lado = (int) numeroLado.getValue();
+                lado = (int) numeroLado.getValue();// Recogemos el valor
+
             if (lado > LADO_MAXIMO)// Queremos que el maximo de longitud sea 50 para evitar errores en la interfaz
                 lado = LADO_MAXIMO;// Si es mayor de 50 le daremos el valor de 50
+
             if (numeroMinas.getValue() == null || (int) numeroMinas.getValue() == 0) {// Si el numero es nulo o 0 le
                                                                                       // asignaremos 20 minas por
                                                                                       // defecto
